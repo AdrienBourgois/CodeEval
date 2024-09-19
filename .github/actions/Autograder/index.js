@@ -48,7 +48,7 @@ function loadAutogradingConfig(path) {
 // Execute a test by running the .exe with the given parameters
 function runTest(test) {
   return new Promise((resolve) => {
-    const command = `x64\\CodeEval.exe ${test.name} ${test.input} ${test.output}`;
+    const command = `x64\\Autograder\\Exercices.exe ${test.name} ${test.input} ${test.output}`;
 
     exec(command, (error, stdout, stderr) => {
       if (error) {
@@ -87,7 +87,7 @@ async function updateCheckRun(totalPoints, maxPoints) {
     const checkRunsResponse = await octokit.rest.checks.listForSuite({
       owner,
       repo,
-      check_name: 'run-autograding-tests',
+      check_name: 'Autograding',
       check_suite_id: checkSuiteId,
     });
 
