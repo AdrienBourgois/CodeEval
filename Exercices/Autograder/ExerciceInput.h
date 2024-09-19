@@ -1,5 +1,8 @@
 #pragma once
+
 #include "ExerciceBase.h"
+
+#include "Helpers.h"
 
 template<typename Input>
 class ExerciceInput : public ExerciceBase

@@ -53,9 +53,6 @@ protected:
 	virtual bool ExecuteInternal();
 	virtual bool ExecuteInternalInput(const std::string& input);
 	virtual bool ExecuteInternalInputOutput(const std::string& input, const std::string& expectedOutput);
-
-	template<typename T>
-	T ConvertFromString(const std::string& str);
 };
 
 ExerciceBase::InputOutputRequirement operator&(ExerciceBase::InputOutputRequirement _lhs, ExerciceBase::InputOutputRequirement _rhs);

@@ -31,6 +31,7 @@
     <ClInclude Include="Autograder\ExerciceInput.h" />
     <ClInclude Include="Autograder\ExerciceInputOutput.h" />
     <ClInclude Include="Autograder\Exercice.h" />
+    <ClInclude Include="Autograder\Helpers.h" />
     <ClInclude Include="Exo1.h" />
     <ClInclude Include="Autograder\TestRegistry.h" />
     <ClInclude Include="Autograder\ExerciceTemplate\ExerciceTemplate.h" />
