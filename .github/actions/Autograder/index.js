@@ -48,7 +48,7 @@ function loadAutogradingConfig(path) {
 // Execute a test by running the .exe with the given parameters
 function runTest(test) {
   return new Promise((resolve) => {
-    const command = `./x64/CodeEval.exe ${test.name} ${test.input} ${test.output}`;
+    const command = `x64\\CodeEval.exe ${test.name} ${test.input} ${test.output}`;
 
     exec(command, (error, stdout, stderr) => {
       if (error) {
@@ -65,9 +65,13 @@ function runTest(test) {
 // Update the check run on GitHub with the test results
 async function updateCheckRun(totalPoints, maxPoints) {
   try {
-    const token = core.getInput('token');
-    const octokit = github.getOctokit(token);
+    const token = process.env.GITHUB_TOKEN;
+    if (!token) {
+      core.setFailed("GitHub token not found");
+      return;
+    }
 
+    const octokit = github.getOctokit(token);
     const [owner, repo] = process.env.GITHUB_REPOSITORY.split('/');
     const runId = process.env.GITHUB_RUN_ID;
 
