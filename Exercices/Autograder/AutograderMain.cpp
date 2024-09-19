@@ -3,11 +3,13 @@
 
 #include "ExerciceTemplate/ExerciceTemplate.h"
 
+#include "Exo1.h"
+
 int main(int argc, char* argv[])
 {
 	if (argc < 2)
 	{
-		std::cerr << "Usage: ./CodeEval <test name> [<input> <output expected>]" << std::endl;
+		std::cerr << "Test name not provided" << std::endl;
 		return 1;
 	}
 
@@ -17,16 +19,16 @@ int main(int argc, char* argv[])
 	std::string inputStr = (argc > 2) ? argv[2] : "";
 	std::string expectedOutputStr = (argc > 3) ? argv[3] : "";
 
-	ExerciceTemplate::Register();
+	Exo1::Register();
 
-	Exercice* exercice = registry.CreateTestInstance(testName);
+	ExerciceBase* exercice = registry.CreateTestInstance(testName);
 	if (!exercice)
 	{
 		std::cerr << "Test not found: " << testName << std::endl;
 		return 1;
 	}
 
-	exercice->Eval(inputStr, expectedOutputStr);
+	exercice->EvalInternal(inputStr, expectedOutputStr);
 	delete exercice;
 
 	return 0;

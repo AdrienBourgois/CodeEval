@@ -1,18 +1,23 @@
 #pragma once
-#include "Exercice.h"
+#include "ExerciceBase.h"
 
 template<typename Input, typename Output>
-class ExerciceWithIO : public Exercice
+class ExerciceInputOutput : public ExerciceBase
 {
 protected:
-	bool RequiresInputOutput() override { return true; }
+	InputOutputRequirement GetRequirement() override
+	{
+		return InputOutputRequirement::Input & InputOutputRequirement::Output;
+	}
 
-	void EvalWithIO(const std::string& inputStr, const std::string& expectedOutputStr) override
+	bool ExecuteInternalInputOutput(const std::string& inputStr, const std::string& expectedOutputStr) override
 	{
 		Input input = ConvertFromString<Input>(inputStr);
 		Output expectedOutput = ConvertFromString<Output>(expectedOutputStr);
 		Output result = ExecuteExercice(input);
 		std::cout << (result == expectedOutput ? "Test passed!" : "Test failed.") << std::endl;
+
+		return false;
 	}
 
 	virtual Output ExecuteExercice(const Input& input) { return Output(); }

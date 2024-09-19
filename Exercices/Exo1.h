@@ -2,7 +2,7 @@
 
 #include "Autograder/CodeEvalCore.h"
 
-TESTIO(Exo1, int, int);
+TestInputOutput(Exo1, int, int);
 
 inline int Exo1::ExecuteExercice(const int& input)
 {

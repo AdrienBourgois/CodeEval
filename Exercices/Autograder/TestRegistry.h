@@ -2,17 +2,17 @@
 #include <functional>
 #include <map>
 #include <string>
-#include "Exercice.h"
+#include "ExerciceBase.h"
 
 class TestRegistry
 {
 public:
-	static void RegisterTest(const std::string& testName, const std::function<Exercice*()>& creator)
+	static void RegisterTest(const std::string& testName, const std::function<ExerciceBase*()>& creator)
 	{
 		tests[testName] = creator;
 	}
 
-	Exercice* CreateTestInstance(const std::string& testName) const
+	ExerciceBase* CreateTestInstance(const std::string& testName) const
 	{
 		if (tests.contains(testName))
 		{
@@ -22,5 +22,5 @@ public:
 	}
 
 private:
-	static std::map<std::string, std::function<Exercice*()>> tests;
+	static std::map<std::string, std::function<ExerciceBase*()>> tests;
 };
