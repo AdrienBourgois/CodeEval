@@ -19,7 +19,7 @@ async function run() {
         maxPoints += test.points;
 
         // Execute the .exe with the test parameters
-        const result = await runTest(test);
+        const result = await runTest(exercise, test);
 
         // If the test succeeds, award the points
         if (result.success) {
@@ -46,7 +46,7 @@ function loadAutogradingConfig(path) {
 }
 
 // Execute a test by running the .exe with the given parameters
-function runTest(test) {
+function runTest(exercise, test) {
   return new Promise((resolve) => {
     const command = `x64\\Autograder\\Exercices.exe ${exercise.name} ${test.input} ${test.output}`;
 
