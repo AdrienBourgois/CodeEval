@@ -1,11 +1,6 @@
 name: Autograder
 description: Executes .exe tests based on autograding.json and updates the GitHub check run with the results.
 author: Millie Bourgois
-inputs:
-  token:
-    description: 'GitHub token for authentication'
-    required: true
-    default: ${{ secrets.GITHUB_TOKEN }}
 runs:
   using: 'node20'
   main: 'index.js'
