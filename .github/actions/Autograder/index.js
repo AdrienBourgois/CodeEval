@@ -48,7 +48,7 @@ function loadAutogradingConfig(path) {
 // Execute a test by running the .exe with the given parameters
 function runTest(test) {
   return new Promise((resolve) => {
-    const command = `x64\\Autograder\\Exercices.exe ${test.name} ${test.input} ${test.output}`;
+    const command = `x64\\Autograder\\Exercices.exe ${exercise.name} ${test.input} ${test.output}`;
 
     exec(command, (error, stdout, stderr) => {
       if (error) {
