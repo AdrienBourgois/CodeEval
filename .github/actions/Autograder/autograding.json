@@ -4,13 +4,13 @@
       "name": "Exo1",
       "tests": [
         {
-          "name": "Test 1",
+          "name": "Test1",
           "input": "5",
           "output": "25",
           "points": 5
         },
         {
-          "name": "Test 2",
+          "name": "Test2",
           "input": "10",
           "output": "100",
           "points": 10
