@@ -3,9 +3,7 @@
 
 #include "ExerciceTemplate/ExerciceTemplate.h"
 
-#include "Exo1.h"
-
-int main(int argc, char* argv[])
+int main(const int argc, char* argv[])
 {
 	if (argc < 2)
 	{
@@ -13,23 +11,21 @@ int main(int argc, char* argv[])
 		return 1;
 	}
 
-	TestRegistry registry;
+	constexpr TestRegistry registry;
 
-	std::string testName = argv[1];
-	std::string inputStr = (argc > 2) ? argv[2] : "";
-	std::string expectedOutputStr = (argc > 3) ? argv[3] : "";
+	const std::string testName = argv[1];
+	const std::string inputStr = argc > 2 ? argv[2] : "";
+	const std::string expectedOutputStr = argc > 3 ? argv[3] : "";
 
-	Exo1::Register();
-
-	ExerciceBase* exercice = registry.CreateTestInstance(testName);
-	if (!exercice)
+	ExerciseBase* exercise = registry.CreateTestInstance(testName);
+	if (!exercise)
 	{
 		std::cerr << "Test not found: " << testName << std::endl;
 		return 1;
 	}
 
-	exercice->EvalInternal(inputStr, expectedOutputStr);
-	delete exercice;
+	exercise->EvalInternal(inputStr, expectedOutputStr);
+	delete exercise;
 
 	return 0;
 }

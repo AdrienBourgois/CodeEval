@@ -1,11 +1,11 @@
 #pragma once
 
-#include "ExerciceBase.h"
+#include "ExerciseBase.h"
 
-#include "Helpers.h"
+#include "Autograder/Helpers.h"
 
 template<typename Input, typename Output>
-class ExerciceInputOutput : public ExerciceBase
+class ExerciseInputOutput : public ExerciseBase
 {
 protected:
 	InputOutputRequirement GetRequirement() override
@@ -23,5 +23,5 @@ protected:
 		return false;
 	}
 
-	virtual Output ExecuteExercice(const Input& input) { return Output(); }
+	virtual Output ExecuteExercise(const Input& input) { return Output(); }
 };

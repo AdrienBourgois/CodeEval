@@ -2,4 +2,4 @@
 
 #include "Autograder/CodeEvalCore.h"
 
-Test(ExerciceTemplate);
+Test(ExerciseTemplate);

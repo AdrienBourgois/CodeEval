@@ -15,36 +15,45 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Autograder\AutograderMain.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ExerciceTemplate\ExerciceTemplate.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Autograder\TestRegistry.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Autograder\ExerciceType\ExerciseBase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Autograder\ExerciceTemplate\ExerciceTemplate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Autograder\Exercice.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Autograder\ExerciceWithIO.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Autograder\ExerciceWithoutIO.h">
+    <ClInclude Include="Autograder\ExerciceType\Exercise.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Autograder\TestRegistry.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ExerciceTemplate\ExerciceTemplate.h">
+    <ClInclude Include="Autograder\CodeEvalCore.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Autograder\CodeEvalCore.h">
+    <ClInclude Include="Autograder\ExerciceType\ExerciseBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Autograder\ExerciceType\ExerciseInput.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Autograder\ExerciceType\ExerciseInputOutput.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Autograder\Helpers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Autograder\ExerciceTemplate\ExerciceTemplate.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -4,46 +4,46 @@
 #include <string>
 
 #define Test(TestName) \
-class TestName : public Exercice { \
+class TestName : public Exercise { \
 public: \
 	static void Register() { \
 		TestRegistry::RegisterTest(#TestName, [] { return new TestName(); }); \
 	} \
 protected: \
-	void ExecuteExercice() override; \
+	void ExecuteExercise() override; \
 }
 
 #define TestInput(TestName, InputType) \
-class TestName : public ExerciceInput<InputType> { \
+class TestName : public ExerciseInput<InputType> { \
 public: \
 	static void Register() { \
 		TestRegistry::RegisterTest(#TestName, [] { return new TestName(); }); \
 	} \
 protected: \
-	void ExecuteExercice(const InputType& input) override; \
+	void ExecuteExercise(const InputType& input) override; \
 }
 
 #define TestInputOutput(TestName, InputType, OutputType) \
-class TestName : public ExerciceInputOutput<InputType, OutputType> { \
+class TestName : public ExerciseInputOutput<InputType, OutputType> { \
 public: \
 	static void Register() { \
 		TestRegistry::RegisterTest(#TestName, [] { return new TestName(); }); \
 	} \
 protected: \
-	OutputType ExecuteExercice(const InputType& input) override; \
+	OutputType ExecuteExercise(const InputType& input) override; \
 }
 
-class ExerciceBase
+class ExerciseBase
 {
 public:
-	enum class InputOutputRequirement : int
+	enum class InputOutputRequirement : char
 	{
 		None = 0,
 		Input = 1,
 		Output = 2
 	};
 
-	virtual ~ExerciceBase() = default;
+	virtual ~ExerciseBase() = default;
 
 	void EvalInternal(const std::string& input = "", const std::string& expectedOutput = "");
 
@@ -55,4 +55,4 @@ protected:
 	virtual bool ExecuteInternalInputOutput(const std::string& input, const std::string& expectedOutput);
 };
 
-ExerciceBase::InputOutputRequirement operator&(ExerciceBase::InputOutputRequirement _lhs, ExerciceBase::InputOutputRequirement _rhs);
+ExerciseBase::InputOutputRequirement operator&(ExerciseBase::InputOutputRequirement _lhs, ExerciseBase::InputOutputRequirement _rhs);

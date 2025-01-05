@@ -1,7 +1,7 @@
 #pragma once
-#include "ExerciceBase.h"
+#include "ExerciseBase.h"
 
-class Exercice : public ExerciceBase
+class Exercise : public ExerciseBase
 {
 protected:
 	InputOutputRequirement GetRequirement() override
@@ -14,5 +14,5 @@ protected:
 		return false;
 	}
 
-	virtual void ExecuteExercice() = 0;
+	virtual void ExecuteExercise() = 0;
 };

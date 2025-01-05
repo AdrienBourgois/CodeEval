@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Autograder/Exercice.h"
-#include "Autograder/ExerciceBase.h"
-#include "Autograder/ExerciceInputOutput.h"
 #include "Autograder/TestRegistry.h"
+#include "Autograder/ExerciceType/ExerciseBase.h"
+#include "Autograder/ExerciceType/Exercise.h"
+#include "Autograder/ExerciceType/ExerciseInputOutput.h"
