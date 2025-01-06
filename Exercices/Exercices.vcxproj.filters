@@ -13,39 +13,42 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Autograder">
+      <UniqueIdentifier>{31c34f42-f0d7-4978-acb9-d207b5b19a2f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Autograder\AutograderMain.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Autograder\ExerciseTest\ValidatorTest.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Autograder\ExerciseTest\ValidatorTest.cpp">
+      <Filter>Autograder</Filter>
+    </ClCompile>
+    <ClCompile Include="Autograder\AutograderMain.cpp">
+      <Filter>Autograder</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Autograder\TestRegistry.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Autograder\Core.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Autograder\ExerciseType\ExerciseBase.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Autograder\ExerciseTest\ValidatorTest.h">
+      <Filter>Autograder</Filter>
     </ClInclude>
     <ClInclude Include="Autograder\ExerciseType\Exercise.h">
-      <Filter>Header Files</Filter>
+      <Filter>Autograder</Filter>
+    </ClInclude>
+    <ClInclude Include="Autograder\ExerciseType\ExerciseBase.h">
+      <Filter>Autograder</Filter>
+    </ClInclude>
+    <ClInclude Include="Autograder\ExerciseTest\ExerciseTest.h">
+      <Filter>Autograder</Filter>
     </ClInclude>
     <ClInclude Include="Autograder\Helpers.h">
-      <Filter>Header Files</Filter>
+      <Filter>Autograder</Filter>
     </ClInclude>
-    <ClInclude Include="Autograder\ExerciseTest\ExerciceTest.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Autograder\TestRegistry.h">
+      <Filter>Autograder</Filter>
     </ClInclude>
-    <ClInclude Include="Autograder\ExerciseTest\ValidatorTest.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Autograder\Core.h">
+      <Filter>Autograder</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
