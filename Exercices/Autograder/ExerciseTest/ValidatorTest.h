@@ -1,5 +1,6 @@
 #pragma once
 
 #include "Autograder/Core.h"
+#include "Autograder/ExerciseType/ExerciseBase.h"
 
-TestInputOutput(ValidatorTest, int, int);
+TEST_INPUT_OUTPUT(ValidatorTest, int, int)
