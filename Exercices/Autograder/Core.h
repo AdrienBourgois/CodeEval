@@ -1,4 +1,4 @@
 #pragma once
 
 #include "Autograder/TestRegistry.h"
-#include "Autograder/ExerciceType/Exercise.h"
+#include "Autograder/ExerciseType/Exercise.h"

@@ -1,6 +1,6 @@
 #include "ValidatorTest.h"
 
-#include "ExerciceTest.h"
+#include "ExerciseTest.h"
 
 bool ValidatorTest::EvalInternal(const int& _input, const int& _expected_output)
 {

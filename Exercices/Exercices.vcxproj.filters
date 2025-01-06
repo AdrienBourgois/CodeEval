@@ -18,7 +18,7 @@
     <ClCompile Include="Autograder\AutograderMain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Autograder\ExerciceTest\ValidatorTest.cpp">
+    <ClCompile Include="Autograder\ExerciseTest\ValidatorTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
@@ -32,19 +32,19 @@
     <ClInclude Include="Autograder\Core.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Autograder\ExerciceType\ExerciseBase.h">
+    <ClInclude Include="Autograder\ExerciseType\ExerciseBase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Autograder\ExerciceType\Exercise.h">
+    <ClInclude Include="Autograder\ExerciseType\Exercise.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Autograder\Helpers.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Autograder\ExerciceTest\ExerciceTest.h">
+    <ClInclude Include="Autograder\ExerciseTest\ExerciceTest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Autograder\ExerciceTest\ValidatorTest.h">
+    <ClInclude Include="Autograder\ExerciseTest\ValidatorTest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

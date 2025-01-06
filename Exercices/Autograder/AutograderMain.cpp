@@ -3,7 +3,7 @@
 
 #include "TestRegistry.h"
 
-#include "ExerciceTest/ValidatorTest.h"
+#include "ExerciseTest/ValidatorTest.h"
 
 int main(const int _argc, char* _argv[])
 {
@@ -34,9 +34,11 @@ int main(const int _argc, char* _argv[])
 	catch (const std::exception& exception)
 	{
 		std::cerr << "Exception caught during evaluation: " << exception.what() << std::endl;
+		return -1;
 	} catch (...)
 	{
 		std::cerr << "Unknown error occurred during evaluation." << std::endl;
+		return -1;
 	}
 
 	delete exercise;

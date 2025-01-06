@@ -5,7 +5,7 @@
 #include <stdexcept>
 #include <string>
 
-#include "ExerciceType/ExerciseBase.h"
+#include "ExerciseType/ExerciseBase.h"
 
 class TestRegistry
 {

@@ -82,7 +82,7 @@ function runTest(exercise, test) {
   return new Promise((resolve) => {
     const input = test.input ? `"${test.input}"` : '';
     const output = test.output ? `"${test.output}"` : '';
-    const command = `x64\\Autograder\\Exercices.exe ${exercise.name} ${input} ${output}`.trim();
+    const command = `x64\\Autograder\\Exercises.exe ${exercise.name} ${input} ${output}`.trim();
 
     core.debug(`Executing command: ${command}`);
 
