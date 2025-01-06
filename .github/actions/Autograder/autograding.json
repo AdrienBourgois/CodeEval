@@ -6,13 +6,13 @@
         {
           "name": "Test1",
           "input": "5",
-          "output": "25",
+          "expected_output": "25",
           "points": 5
         },
         {
           "name": "Test2",
           "input": "10",
-          "output": "100",
+          "expected_output": "100",
           "points": 10
         }
       ]
