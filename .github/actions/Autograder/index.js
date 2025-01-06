@@ -90,15 +90,11 @@ function runTest(exercise, test) {
       if (error) {
         resolve({ success: false, message: stderr.trim() || error.message, details: stderr });
       } else {
-        const result = stdout.trim();
-        if (result === test.expected_output) {
-          resolve({ success: true });
+        const exitCode = error ? error.code : 0; // Capture the C++ return code
+if (exitCode === 0) {
+          resolve({ success: true, message: "C++ program exited successfully." });
         } else {
-          resolve({
-            success: false,
-            message: `Expected "${test.expected_output}", got "${result}".`,
-            details: result
-          });
+          resolve({ success: false, message: `C++ program failed with exit code ${exitCode}.`, details: stderr.trim() });
         }
       }
     });

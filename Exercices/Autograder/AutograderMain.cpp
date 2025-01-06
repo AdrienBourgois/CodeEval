@@ -27,9 +27,11 @@ int main(const int _argc, char* _argv[])
 		return 1;
 	}
 
+	bool result;
+
 	try
 	{
-		exercise->PrepareEval(input_str, expected_output_str);
+		result = exercise->PrepareEval(input_str, expected_output_str);
 	}
 	catch (const std::exception& exception)
 	{
@@ -42,6 +44,9 @@ int main(const int _argc, char* _argv[])
 	}
 
 	delete exercise;
+
+	if (!result)
+		return -1;
 
 	return 0;
 }
