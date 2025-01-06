@@ -15,9 +15,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Autograder\ExerciceType\ExerciseBase.cpp" />
-    <ClCompile Include="Autograder\TestRegistry.cpp" />
-    <ClCompile Include="Autograder\ExerciceTemplate\ExerciceTemplate.cpp" />
+    <ClCompile Include="Autograder\ExerciceTest\ValidatorTest.cpp" />
     <ClCompile Include="Autograder\AutograderMain.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)' != 'Autograder'">true</ExcludedFromBuild>
     </ClCompile>
@@ -26,14 +24,13 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Autograder\CodeEvalCore.h" />
+    <ClInclude Include="Autograder\Core.h" />
+    <ClInclude Include="Autograder\ExerciceTest\ValidatorTest.h" />
     <ClInclude Include="Autograder\ExerciceType\ExerciseBase.h" />
-    <ClInclude Include="Autograder\ExerciceType\ExerciseInput.h" />
-    <ClInclude Include="Autograder\ExerciceType\ExerciseInputOutput.h" />
     <ClInclude Include="Autograder\ExerciceType\Exercise.h" />
     <ClInclude Include="Autograder\Helpers.h" />
     <ClInclude Include="Autograder\TestRegistry.h" />
-    <ClInclude Include="Autograder\ExerciceTemplate\ExerciceTemplate.h" />
+    <ClInclude Include="Autograder\ExerciceTest\ExerciceTest.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

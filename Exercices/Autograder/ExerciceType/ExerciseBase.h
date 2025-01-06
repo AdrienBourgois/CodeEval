@@ -4,55 +4,97 @@
 #include <string>
 
 #define Test(TestName) \
-class TestName : public Exercise { \
+class TestName : public Exercise<void, void> { \
 public: \
 	static void Register() { \
 		TestRegistry::RegisterTest(#TestName, [] { return new TestName(); }); \
 	} \
+	TestName() { exerciseName = #TestName; } \
 protected: \
 	void ExecuteExercise() override; \
+	bool EvalInternal() override; \
 }
 
 #define TestInput(TestName, InputType) \
-class TestName : public ExerciseInput<InputType> { \
+class TestName : public Exercise<InputType, void> { \
 public: \
 	static void Register() { \
 		TestRegistry::RegisterTest(#TestName, [] { return new TestName(); }); \
 	} \
+	TestName() { exerciseName = #TestName; } \
 protected: \
-	void ExecuteExercise(const InputType& input) override; \
+	void ExecuteExercise(const InputType& _input) override; \
+	bool EvalInternal(const InputType& _input) override; \
 }
 
 #define TestInputOutput(TestName, InputType, OutputType) \
-class TestName : public ExerciseInputOutput<InputType, OutputType> { \
+class TestName : public Exercise<InputType, OutputType> { \
 public: \
 	static void Register() { \
 		TestRegistry::RegisterTest(#TestName, [] { return new TestName(); }); \
 	} \
+	TestName() { exerciseName = #TestName; } \
 protected: \
-	OutputType ExecuteExercise(const InputType& input) override; \
+	OutputType ExecuteExercise(const InputType& _input) override; \
+	bool EvalInternal(const InputType& _input, const OutputType& _expected_output) override; \
 }
 
 class ExerciseBase
 {
 public:
-	enum class InputOutputRequirement : char
-	{
-		None = 0,
-		Input = 1,
-		Output = 2
-	};
-
 	virtual ~ExerciseBase() = default;
 
-	void EvalInternal(const std::string& input = "", const std::string& expectedOutput = "");
+	virtual bool PrepareEval(const std::string& _input, const std::string& _expected_output) = 0;
 
 protected:
-	virtual InputOutputRequirement GetRequirement() = 0;
+	const std::string& GetExerciseName() const
+	{
+		return exerciseName;
+	}
 
-	virtual bool ExecuteInternal();
-	virtual bool ExecuteInternalInput(const std::string& input);
-	virtual bool ExecuteInternalInputOutput(const std::string& input, const std::string& expectedOutput);
+	std::string exerciseName;
+
+	void LogSuccess(const std::string& _input, const std::string& _expected, const std::string& _result, const std::string& _message = "") const
+	{
+		std::cout << "[SUCCESS] Exercise: \"" << exerciseName << "\"";
+		if (!_input.empty())
+		{
+			std::cout << " | Input: \"" << _input << "\"";
+		}
+		if (!_expected.empty())
+		{
+			std::cout << " | Expected: \"" << _expected << "\"";
+		}
+		if (!_result.empty())
+		{
+			std::cout << " | Result: \"" << _result << "\"";
+		}
+		if (!_message.empty())
+		{
+			std::cout << " | Message: \"" << _message << "\"";
+		}
+		std::cout << std::endl;
+	}
+
+	void LogFailure(const std::string& _input, const std::string& _expected, const std::string& _result, const std::string& _message = "") const
+	{
+		std::cerr << "[FAILURE] Exercise: \"" << exerciseName << "\"";
+		if (!_input.empty())
+		{
+			std::cerr << " | Input: \"" << _input << "\"";
+		}
+		if (!_expected.empty())
+		{
+			std::cerr << " | Expected: \"" << _expected << "\"";
+		}
+		if (!_result.empty())
+		{
+			std::cerr << " | Result: \"" << _result << "\"";
+		}
+		if (!_message.empty())
+		{
+			std::cerr << " | Message: \"" << _message << "\"";
+		}
+		std::cerr << std::endl;
+	}
 };
-
-ExerciseBase::InputOutputRequirement operator&(ExerciseBase::InputOutputRequirement _lhs, ExerciseBase::InputOutputRequirement _rhs);

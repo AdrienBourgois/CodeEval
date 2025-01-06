@@ -1,21 +1,26 @@
 #pragma once
 
+#include <stdexcept>
 #include <string>
+#include <type_traits>
 
 template<typename T>
-T ConvertFromString(const std::string& str)
+T ConvertFromString(const std::string& _str)
 {
 	if constexpr (std::is_same_v<T, int>)
 	{
-		return std::stoi(str);
+		return std::stoi(_str);
 	}
 	else if constexpr (std::is_same_v<T, float>)
 	{
-		return std::stof(str);
+		return std::stof(_str);
 	}
 	else if constexpr (std::is_same_v<T, std::string>)
 	{
-		return str;
+		return _str;
 	}
-	return T();
+	else
+	{
+		throw std::invalid_argument("Unsupported type for conversion.");
+	}
 }

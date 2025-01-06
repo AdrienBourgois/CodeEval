@@ -6,57 +6,100 @@ const { exec } = require('child_process');
 // Main function
 async function run() {
   try {
+    await core.group('ValidatorTest', async () => {
+      await runValidatorTest();
+    });
+
     const tests = loadAutogradingConfig('./.github/actions/Autograder/autograding.json');
 
     let totalPoints = 0;
     let maxPoints = 0;
 
-    for (const exercise of tests.exercises) {
-      console.log(`Running tests for exercise: ${exercise.name}`);
+    await core.group('Starting Autograding', async () => {
+      for (const exercise of tests.exercises) {
+        await core.group(`Running tests for exercise: ${exercise.name}`, async () => {
+          for (const test of exercise.tests) {
+            core.info(`Starting test: ${test.name}`);
+            maxPoints += test.points;
 
-      for (const test of exercise.tests) {
-        console.log(`Running test: ${test.name}`);
-        maxPoints += test.points;
+            const result = await runTest(exercise, test);
 
-        // Execute the .exe with the test parameters
-        const result = await runTest(exercise, test);
-
-        // If the test succeeds, award the points
-        if (result.success) {
-          totalPoints += test.points;
-          console.log(`Test ${test.name} passed. +${test.points} points.`);
-        } else {
-          console.log(`Test ${test.name} failed.`);
-        }
+            if (result.success) {
+              totalPoints += test.points;
+              core.notice(`Test ${test.name} passed. +${test.points} points.`);
+            } else {
+              core.warning(`Test ${test.name} failed: ${test.message}`);
+              core.error(`Detailed Error: ${result.details}`);
+            }
+          }
+        });
       }
-    }
+    });
 
-    // Update the check run with the final score
     await updateCheckRun(totalPoints, maxPoints);
-
   } catch (error) {
-    core.setFailed(`Error running autograding: ${error.message}`);
+    core.error(`Critical error during autograding: ${error.message}`);
+    core.setFailed(error.message);
+  }
+}
+
+// Run the ValidatorTest to ensure infrastructure is functional
+async function runValidatorTest() {
+  const validatorTest = {
+    name: "ValidatorTest",
+    tests: [
+      { name: "Basic Addition Test", input: "5", expected_output: "10", points: 0 }
+    ]
+  };
+
+  for (const test of validatorTest.tests) {
+    core.info(`Running ValidatorTest: ${test.name}`);
+    const result = await runTest(validatorTest, test);
+
+    if (result.success) {
+      core.notice(`ValidatorTest passed: ${test.name}`);
+    } else {
+      core.error(`ValidatorTest failed: ${test.name}, details: ${result.details}`);
+      throw new Error("ValidatorTest failed. Stopping pipeline.");
+    }
   }
 }
 
 // Load the test configuration from autograding.json
 function loadAutogradingConfig(path) {
-  const rawData = fs.readFileSync(path);
-  return JSON.parse(rawData);
+  try {
+    const rawData = fs.readFileSync(path);
+    return JSON.parse(rawData);
+  } catch (error) {
+    core.error(`Error loading autograding configuration: ${error.message}`);
+    core.setFailed(error.message);
+    throw error;
+  }
 }
 
 // Execute a test by running the .exe with the given parameters
 function runTest(exercise, test) {
   return new Promise((resolve) => {
-    const command = `x64\\Autograder\\Exercices.exe ${exercise.name} ${test.input} ${test.output}`;
+    const input = test.input ? `"${test.input}"` : '';
+    const output = test.output ? `"${test.output}"` : '';
+    const command = `x64\\Autograder\\Exercices.exe ${exercise.name} ${input} ${output}`.trim();
+
+    core.debug(`Executing command: ${command}`);
 
     exec(command, (error, stdout, stderr) => {
       if (error) {
-        console.log(`Error executing test ${test.name}: ${error.message}`);
-        resolve({ success: false });
+        resolve({ success: false, message: stderr.trim() || error.message, details: stderr });
       } else {
-        console.log(`stdout for test ${test.name}: ${stdout.trim()}`);
-        resolve({ success: true });
+        const result = stdout.trim();
+        if (result === test.expected_output) {
+          resolve({ success: true });
+        } else {
+          resolve({
+            success: false,
+            message: `Expected "${test.expected_output}", got "${result}".`,
+            details: result
+          });
+        }
       }
     });
   });
@@ -98,29 +141,32 @@ async function updateCheckRun(totalPoints, maxPoints) {
     }
 
     const text = `Points ${totalPoints}/${maxPoints}`;
-    await octokit.rest.checks.update({
-      owner,
-      repo,
-      check_run_id: checkRun.id,
-      output: {
-        title: 'Autograding',
-        summary: text,
-        text: JSON.stringify({ totalPoints, maxPoints }),
-        annotations: [
-          {
-            path: '.github',
-            start_line: 1,
-            end_line: 1,
-            annotation_level: 'notice',
-            message: text,
-            title: 'Autograding complete',
-          },
-        ],
-      },
+    await core.group('Updating GitHub Check', async () => {
+      await octokit.rest.checks.update({
+        owner,
+        repo,
+        check_run_id: checkRun.id,
+        output: {
+          title: 'Autograding',
+          summary: text,
+          text: JSON.stringify({ totalPoints, maxPoints }, null, 2),
+          annotations: [
+            {
+              path: '.github/actions/Autograder/autograding.json',
+              start_line: 1,
+              end_line: 1,
+              annotation_level: 'notice',
+              message: text,
+              title: 'Autograding complete',
+            },
+          ],
+        },
+      });
     });
 
   } catch (error) {
-    core.setFailed(`Error updating check run: ${error.message}`);
+    core.error(`Error updating check run: ${error.message}`);
+    core.setFailed(error.message);
   }
 }
 

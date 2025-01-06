@@ -1,6 +1,8 @@
 #pragma once
+
 #include <functional>
 #include <map>
+#include <stdexcept>
 #include <string>
 
 #include "ExerciceType/ExerciseBase.h"
@@ -8,20 +10,24 @@
 class TestRegistry
 {
 public:
-	static void RegisterTest(const std::string& testName, const std::function<ExerciseBase*()>& creator)
+	static void RegisterTest(const std::string& _test_name, const std::function<ExerciseBase*()>& _creator)
 	{
-		tests[testName] = creator;
+		if (tests.contains(_test_name))
+		{
+			throw std::runtime_error("Test already registered: " + _test_name);
+		}
+		tests[_test_name] = _creator;
 	}
 
-	ExerciseBase* CreateTestInstance(const std::string& testName) const
+	static ExerciseBase* CreateTestInstance(const std::string& _test_name)
 	{
-		if (tests.contains(testName))
+		if (const auto it = tests.find(_test_name); it != tests.end())
 		{
-			return tests[testName]();
+			return it->second();
 		}
 		return nullptr;
 	}
 
 private:
-	static std::map<std::string, std::function<ExerciseBase*()>> tests;
+	static inline std::map<std::string, std::function<ExerciseBase*()>> tests;
 };
